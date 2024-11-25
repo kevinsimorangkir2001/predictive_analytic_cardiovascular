@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Marcel Aditya Pamungkas
+# Laporan Proyek Machine Learning - Kevin Caesar Simorangkir
 
 ## Domain Proyek
 
