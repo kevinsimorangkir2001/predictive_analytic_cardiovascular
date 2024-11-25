@@ -67,7 +67,7 @@ max	| 2.000000	| 250.000000	| 200.000000	| 16020.000000 |	11000.000000	| 3.00000
 
 Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecakan lebih lanjut
 
-<img src = "gambar/Boxplot_after.png"/> <br>
+<img src = "gambar/boxplot_after.png"/> <br>
 
 boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
 
