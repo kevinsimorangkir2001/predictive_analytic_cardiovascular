@@ -1,6 +1,6 @@
 # Laporan Proyek Machine Learning - Kevin Caesar Simorangkir
 
-## Domain Proyek
+## Domain Proyek (Kesehatan)
 
 Penyakit cardiovascular merupakan jenis penyakit jantung yang disebabkan kurang pasokan darah ke jantung [1]. cardiovascular menjadi penyebab kematian nomor 2 setelah stroke, menyumbang 12,9% dari seluruh kematian di Indonesia [2]. menurut [3], terdapat keterkaitan erat antara obesitas dengan kejadian cardiovascular di RS Umum Bahteramas. Obesitas dapat menyebabkan terjadinya peningkatan pada tekanan darah/ hipertensi, kadar trigliserida, kolesterol, resistensi glukosa, dan risiko penggumpalan darah, yang semuanya terkait dengan cardiovascular. Obesitas merupakan kelebihan lemak di jaringan adiposa dan merupakan salah satu dari masalah paling umum yang dapat muncul dan dapat dicegah dengan banyak bergerak[4]. gaya hidup juga keterkaitan dengan cardiovascular dan obesitas. maka observasi yang dilakukan menggunakan variabel umur dalam hari, gender, tinggi badan, berat badan, tekanan darah, kadar cholesterol, kadar glukosa, merokok,alcohol,	activitas,	terkena penyakit cardiovascular. Tentu akan lebih baik jika cardiovascular dapat dideteksi sedini mungkin.<br>
 
