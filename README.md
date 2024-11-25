@@ -6,7 +6,7 @@ Penyakit cardiovascular merupakan jenis penyakit jantung yang disebabkan kurang 
 
 Pada zaman sekarang, teknologi telah berkembang pesat, salah satunya adalah teknologi *machine learning*. *machine learning* telah digunakan ke dalam berbagai bidang, salah satunya bidang kesehatan. *machine learning* mampu mendeteksi berbagai macam penyakit dengan berbagai parameter maupun faktor yang diberikan, salah satunya adalah mendeteksi cardiovascular. Oleh sebab itu, pada proyek ini, penulis ingin memanfaatkan *machine learning* untuk mendeteksi terkena cardiovascular pada seseorang, terutama yang didiagnosis mengalami obesitas agar dapat icegah. Penulis ingin memprediksi penyakit cardiovascular pada responden menggunakan 7 model, yaitu *Extreme Gradient Boosting* (XGBoost), *Support Vector Machine* (SVM), *K-Nearest Neighbors* (KNN), *AdaBoosting*,*Catboosting*,*Decision Tree*, dan *Random Forest*. Penulis menggunakan dataset dari Kaggle yang dapat diakses pada link [berikut](https://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset).
 
-<img src = "gambar/cardiovascular.png"/> <br>
+<img src = "gambar/cardiovascular.jpg"/> <br>
 
 ## Business Understanding
 
@@ -387,5 +387,3 @@ makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh ses
 
 7. Dicoding. Diakses pada 6 Juli 2024 dari https://www.dicoding.com/academies/319-machine-learning-terapan
 
-#   p r e d i c t i v e _ a n a l y t i c _ c a r d i o v a s c u l a r  
- 
