@@ -49,13 +49,14 @@ active | 0: tidak olahrga, 1: aktif olahraga
 cardio | 0: tidak terkena sakit cardio, 1: terkena sakit cardio
 
 
+<img src = "gambar/umur.png"/> <br>
 
-### Data Cleaning
-Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tidak ada. Sementara itu, setelah diperiksa apakah terdapat data duplikat, ditemukan 24 duplikat, sehingga data duplikat ini dihapus. Oleh karena itu, setelah dilakukan pembersihan data, diperoleh deskripsi statistik data numerik sebagai berikut. 
+kolom age dihapus karena sudah diganti dengan umur ,sedangkan untuk kolom id dihapus karena tidak bermakna untuk pembentukan model di machine learning <br>
 
+### Deskripsi Statistik dari Data
 | 	| gender	| height	| weight	| ap_hi	| ap_lo	| cholesterol	| gluc	| smoke	| alco	| active	| cardio	| umur|
 ----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------|----------
-count	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000	| 66782.000000
+count	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000	| 70000.000000 
 mean	| 1.356129	| 164.341619	| 74.522241	| 129.161990	| 97.473840	| 1.382693	| 1.236112	| 0.092121	| 0.056288	| 0.798524	| 0.511994	| 53.857372
 std	| 0.478858	| 8.333598	| 14.579325	| 157.493091	| 192.913276	| 0.690109	| 0.582060	| 0.289198	| 0.230478	| 0.401106	| 0.499860	| 6.803136
 min	| 1.000000	| 55.000000	| 10.000000	| -150.000000	| -70.000000	| 1.000000	| 1.000000	| 0.000000	| 0.000000	| 0.000000	| 0.000000	| 30.000000
@@ -64,25 +65,23 @@ min	| 1.000000	| 55.000000	| 10.000000	| -150.000000	| -70.000000	| 1.000000	| 1
 75%	| 2.000000	| 170.000000	| 83.000000	| 140.000000	| 90.000000	| 2.000000	| 1.000000	| 0.000000	| 0.000000	| 1.000000	| 1.000000	| 59.000000
 max	| 2.000000	| 250.000000	| 200.000000	| 16020.000000 |	11000.000000	| 3.000000	| 3.000000	| 1.000000	| 1.000000	| 1.000000	| 1.000000	| 65.000000
 
+- `Count` adalah jumlah sampel pada data.
+- `Mean` adalah nilai rata-rata.
+- `Std` adalah standar deviasi.
+- `Min` yaitu nilai minimum setiap kolom.
+- `25%` adalah kuartil pertama. Kuartil adalah nilai yang menandai batas interval dalam empat bagian sebaran yang sama.
+- `50%` adalah kuartil kedua, atau biasa juga disebut median (nilai tengah).
+-` 75%` adalah kuartil ketiga.
+- `Max` adalah nilai maksimum.
 
 Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecakan lebih lanjut
 
-<img src = "gambar/boxplot_after.png"/> <br>
-
-boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
-
-1. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 65-85 kilogram. Terdapat beberapa outlier. meski demikian, outlier ini akan tidak dihapus karena memungkinan memiliki berat 110 kg.
-2. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,55-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
-3. Pada kolom `ap_hi`, dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 120 mmHg - 140 mmHg.
-4. Pada kolom `ap_lo`,  dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 80 mmHg - 90 mmHg.
-
-Untuk proses analisis ini, Data sudah siap untuk diproses dan dianalisis.
 
 ### Univariate Analysis
 
 Dari variabel-variabel yang diketahui, variabel dapat dibagi menjadi 2 jenis, yaitu variabel numerikal dan variabel kategorikal. Berikut merupakan kolom-kolom yang termasuk dalam variabel numerikal maupun kategorikal. <br>
 Kolom-kolom numerikal: ['umur', 'height', 'weight', 'ap_hi', 'ap_lo'] <br>
-Kolom-kolom kategorikal: ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio']
+Kolom-kolom kategorikal: ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio'] <br>
 Pertama, kita akan memvisualisasikan kolom-kolom kategorikal untuk melihat jumlah-jumlah nilai kategorikal menggunakan bar plot.
 
 <img src = "gambar/analisis_kategorik.png"/> <br>
@@ -140,7 +139,7 @@ Dari gambar di atas, disimpulkan bahwa
 
 <img src = "gambar/kolerasi_variabel.png"/> <br>
 
-Dari heatmap di atas, dapat dilihat bahwa berat badan responden memiliki
+Dari heatmap di atas, dapat dilihat bahwa responden memiliki
 1. Korelasi positif yang cukup kuat dengan tinggi dibandingkan faktor numerik lain.
 2. Korelasi positif yang sangat lemah terhadap usia.
 3. Korelasi positif yang lemah terhadap tekanan sistolik.
@@ -149,6 +148,42 @@ Dari heatmap di atas, dapat dilihat bahwa berat badan responden memiliki
 
 ## Data Preparation
 Pertama, akan diubah nilai-nilai kategorikal pada data menggunakan encoder sehingga menjadi nilai-nilai numerik agar dapat dilatih dengan *machine learning*.
+
+
+### Data Cleaning
+Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tidak ada. Sementara itu, setelah diperiksa apakah terdapat data duplikat, ditemukan 3197 duplikat, sehingga data duplikat ini dihapus. Oleh karena itu, setelah dilakukan pembersihan data, diperoleh deskripsi statistik data numerik sebagai berikut. 
+
+
+#### Menangani Duplikat 
+<img src = "gambar/duplikat.png"/> <br>
+
+Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus.
+
+<img src = "gambar/hapus duplikat.png"/> <br>
+setelah dicek terdapat 3197 data yang duplicated yang kemudian kita hapus agar tidak memprediksi hasil prediksi dengan menggunakan code diatas.
+
+#### Menangani Missing Values
+<img src = "gambar/cek_missing_value.png"/> <br>
+
+dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempenagaruhi peforma machine learning. <br>
+
+<img src = "gambar/cek_missing_value_2.png"/> <br>
+setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0 karena tidak mungkin memiliki tekanan darah diastolik 0 maka dalam ini dianggap sebagai missing value yang harus dihapus agar tidak mempengaruhi performa dari machine learning yang dibuat.
+
+<img src = "gambar/cek_missing_value_3.png"/> <br>
+setelah ditangani untuk setiap kolom yg dipilih tidak terdapat nilai 0. selanjutnya diperlukan penanganan outlier dilihat statistik data yang tidak sesuai dengan penelitian.
+
+#### Menangani Outliers
+<img src = "gambar/boxplot_after.png"/> <br>
+
+boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
+
+1. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 65-85 kilogram. Terdapat beberapa outlier. meski demikian, outlier ini akan tidak dihapus karena memungkinan memiliki berat 110 kg.
+2. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,55-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
+3. Pada kolom `ap_hi`, dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 120 mmHg - 140 mmHg.
+4. Pada kolom `ap_lo`,  dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 80 mmHg - 90 mmHg.
+
+
 
 ### Encoding Kategorikal
 Encoding Kategorikal dilakukan terhadap 4 variabel, yaitu
@@ -187,7 +222,32 @@ Algoritma ini bekerja dengan mengimplementasikan *decision tree* yang kemudian d
 
 Pada pemodelan ini, XGBoost diimplementasikan menggunakan `XGBClassifier` dari library `xgboost` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `max_depth` yaitu kedalaman maksimum setiap tree, `n_estimators` yaitu jumlah tree yang akan dibuat, `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi, `learning rate` yaitu mengatur langkah setiap iterasi ketika meminimumkan *loss function*, dan `n_jobs` yaitu mengatur jumlah CPU threads untuk menjalankan XGBoost. Pada proyek ini, parameter yang digunakan adalah `max_depth = 4`, `n_estimators = 118`, `random_state = 30`, `learning_rate = 0.0701335604673830`, `n_jobs = -1`.
 
-### 2. ***Adaptive Boosting* (AdaBoost)**
+### 2. ***Logistik Regresion***
+
+Logistic Regression adalah metode statistik yang digunakan untuk memprediksi probabilitas suatu hasil biner (dua kategori) berdasarkan satu atau lebih variabel independen. Meskipun mengandung kata "regression," metode ini digunakan untuk klasifikasi, bukan regresi seperti pada linear regression. Logistic regression sering digunakan dalam pembelajaran mesin dan statistik untuk memodelkan hubungan antara variabel input (fitur) dan hasil biner. <br>
+
+Pada pemodelan ini, *Logistik Regression* diimplementasikan menggunakan `LogisticRegression` dari library `sklearn.liniear_model` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah  `solver:sag` untuk menemukan parameter terbaik (koefisien) dalam model dengan data yang besar dan sparseness tinggi dan `n_jobs=-1` diatur ke -1, model akan menggunakan semua inti yang tersedia, sehingga mempercepat proses pelatihan.
+
+### 3. ***Decission Tree***
+
+Decision Tree adalah algoritma pembelajaran mesin yang digunakan untuk tugas klasifikasi dan regresi. Decision tree membagi dataset menjadi subset yang lebih kecil berdasarkan aturan keputusan yang diterapkan pada fitur input. Proses ini diulang secara rekursif, menghasilkan struktur seperti pohon. memiliki kelebihan yaitu Dapat Menangani Data Kategorikal dan Numerik,algoritma dapat bekerja dengan baik untuk berbagai jenis data tanpa perlu transformasi kompleks, cepat untuk Pelatihan dan Prediksi, dan dapat Menangkap Interaksi Non-Linear, sedangkan mempunya kelemahan yaitu Bias terhadap Fitur dengan Banyak Kategori (misalnya, kode pos) dan tidak Menangani Pola Kompleks Secara Efisien. <br>
+
+Pada pemodelan ini, *Decision Tree* diimplementasikan menggunakan `DecisionTreeClassifier` dari library `sklearn.tree` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `min_samples_split = 45`, `max_features = None`, `max_depth = 9`, `min_samples_leaf = 26`.
+
+
+### 4. ***K-Nearest Neighbors* (KNN)**
+
+Algoritma ini bekerja dengan mengklasifikasikan titik data berdasarkan kelas mayoritas dari sejumlah k tetangga terdekatnya. Kelebihan dari algoritma ini adalah mudah dan simple untuk digunakan, tidak ada fase *lazy learning* sehingga cepat, dan efektif. Sementara itu, kekurangan dari algoritma ini adalah sensitif terhadap pemilihan k dan metrik jarak serta memiliki performa buruk untuk data berdimensi tinggi (*curse of dimensionality*). <br>
+
+Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsClassif/ier` dari library `sklearn.neighbors` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_neighbors` yaitu jumlah k tetangga. Pada proyek ini, parameter yang digunakan adalah `n_neighbors = 20`.
+
+### 5. ***Random Forest***
+
+Algoritma ini bekerja dengan membentuk decision trees, lalu menggunakan sampiing dengan penggantian (*bootstrapping*) dan pemilihan fitur acak untuk setiap pohon agar pohon-pohon menjadi beragam. Kelebihan dari algoritma ini adalah memiliki akurasi tinggi karena menggunakan pendekatan ensemble, mencegah *overfitting* dengan jumlah pohon yang banyak, dan mampu menangani dataset berukuran besar dan multi dimensi. Sedangkan kekurangan dari algoritma ini adalah komputasi yang besar untuk jumlah pohon yang besar dan membutuhkan memori yang besar untuk menyimpan seluruh pohon. <br>
+
+Pada pemodelan ini, *Random Forest* diimplementasikan menggunakan `RandomForestClassifier` dari library `sklearn.ensemble` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_estimators` yaitu jumlah tree yang akan dibuat, `criterion` yaitu fungsi untuk menentukan kualitas *splitting data*, `max_depth` yaitu kedalaman maksimum setiap tree, dan `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi. Pada proyek ini, parameter yang digunakan adalah `n_estimators = 100`, `criterion = "entropy"`, `max_depth = 10`, `random_state = 50`.
+
+### 6. ***Adaptive Boosting* (AdaBoost)**
 
 AdaBoost (Adaptive Boosting) adalah algoritma boosting yang bekerja dengan membangun serangkaian model yang secara bertahap mengurangi kesalahan. Pada setiap langkah, model fokus pada kesalahan dari model sebelumnya, sehingga iterasi berikutnya akan memperbaiki kesalahan tersebut. Model ini memberikan bobot lebih pada data yang sulit diprediksi dan menggabungkan hasil dari semua model yang telah dilatih untuk menghasilkan prediksi akhir yang lebih baik. <br>
 
@@ -217,29 +277,6 @@ AdaBoost (Adaptive Boosting) adalah algoritma boosting yang bekerja dengan memba
 
        - `y_train`: Nilai target yang sesuai dengan `X_train`.
 
-### 3. ***K-Nearest Neighbors* (KNN)**
-
-Algoritma ini bekerja dengan mengklasifikasikan titik data berdasarkan kelas mayoritas dari sejumlah k tetangga terdekatnya. Kelebihan dari algoritma ini adalah mudah dan simple untuk digunakan, tidak ada fase *lazy learning* sehingga cepat, dan efektif. Sementara itu, kekurangan dari algoritma ini adalah sensitif terhadap pemilihan k dan metrik jarak serta memiliki performa buruk untuk data berdimensi tinggi (*curse of dimensionality*). <br>
-
-Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsClassifier` dari library `sklearn.neighbors` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_neighbors` yaitu jumlah k tetangga. Pada proyek ini, parameter yang digunakan adalah `n_neighbors = 4`.
-
-### 4. ***Random Forest***
-
-Algoritma ini bekerja dengan membentuk decision trees, lalu menggunakan sampiing dengan penggantian (*bootstrapping*) dan pemilihan fitur acak untuk setiap pohon agar pohon-pohon menjadi beragam. Kelebihan dari algoritma ini adalah memiliki akurasi tinggi karena menggunakan pendekatan ensemble, mencegah *overfitting* dengan jumlah pohon yang banyak, dan mampu menangani dataset berukuran besar dan multi dimensi. Sedangkan kekurangan dari algoritma ini adalah komputasi yang besar untuk jumlah pohon yang besar dan membutuhkan memori yang besar untuk menyimpan seluruh pohon. <br>
-
-Pada pemodelan ini, *Random Forest* diimplementasikan menggunakan `RandomForestClassifier` dari library `sklearn.ensemble` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_estimators` yaitu jumlah tree yang akan dibuat, `criterion` yaitu fungsi untuk menentukan kualitas *splitting data*, `max_depth` yaitu kedalaman maksimum setiap tree, dan `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi. Pada proyek ini, parameter yang digunakan adalah `n_estimators = 100`, `criterion = "entropy"`, `max_depth = 10`, `random_state = 50`.
-
-### 5. ***Logistik Regresion***
-
-Logistic Regression adalah metode statistik yang digunakan untuk memprediksi probabilitas suatu hasil biner (dua kategori) berdasarkan satu atau lebih variabel independen. Meskipun mengandung kata "regression," metode ini digunakan untuk klasifikasi, bukan regresi seperti pada linear regression. Logistic regression sering digunakan dalam pembelajaran mesin dan statistik untuk memodelkan hubungan antara variabel input (fitur) dan hasil biner. <br>
-
-Pada pemodelan ini, *Logistik Regression* diimplementasikan menggunakan `LogisticRegression` dari library `sklearn.liniear_model` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah  `solver:sag` untuk menemukan parameter terbaik (koefisien) dalam model dengan data yang besar dan sparseness tinggi dan `n_jobs=-1` diatur ke -1, model akan menggunakan semua inti yang tersedia, sehingga mempercepat proses pelatihan.
-
-### 6. ***Decission Tree***
-
-Decision Tree adalah algoritma pembelajaran mesin yang digunakan untuk tugas klasifikasi dan regresi. Decision tree membagi dataset menjadi subset yang lebih kecil berdasarkan aturan keputusan yang diterapkan pada fitur input. Proses ini diulang secara rekursif, menghasilkan struktur seperti pohon. memiliki kelebihan yaitu Dapat Menangani Data Kategorikal dan Numerik,algoritma dapat bekerja dengan baik untuk berbagai jenis data tanpa perlu transformasi kompleks, cepat untuk Pelatihan dan Prediksi, dan dapat Menangkap Interaksi Non-Linear, sedangkan mempunya kelemahan yaitu Bias terhadap Fitur dengan Banyak Kategori (misalnya, kode pos) dan tidak Menangani Pola Kompleks Secara Efisien. <br>
-
-Pada pemodelan ini, *Decision Tree* diimplementasikan menggunakan `DecisionTreeClassifier` dari library `sklearn.tree` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `min_samples_split = 26`, `criterion = "entropy"`, `max_depth = 9`, `min_samples_leaaf = 26`.
 
 ### 7. ***CatBoosting***
 CatBoost mencoba memprediksi probabilitas kelas target berdasarkan fitur input dengan cara membangun model pohon keputusan secara iteratif, di mana setiap iterasi bertujuan untuk memperbaiki kesalahan model sebelumnya. Memiliki kelebihan yaitu Mengurangi Overfitting dengan Regularisasi Unik dan performa tinggi ,sedangkan memiliki kekurangan yaitu waktu training lebih lama dan memori lebih tinggi.<br>
@@ -360,11 +397,11 @@ Dari seluruh akurasi yang diketahui dari keempat model, dibentuk bar plot untuk 
 Berdasarkan gambar di atas dan evaluasi masing-masing model untuk mengetahui skor akurasi, skor F1, dan jumlah kesalahan klasifikasi pada masing-masing model, didapat model *XGBoost* merupakan model terbaik karena memiliki skor akurasi dan skor F1 tertinggi, serta jumlah kesalahan klasifikasi yang paling sedikit, terutama pada cardiovascular. 
 
 <img src = "gambar/variabel_important.png"/> <br>
-makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah diastolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur.
+makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah sistolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur.
 
 
 ## Kesimpulan
-1. Berdasarkan data yang diperoleh, menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah diastolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur. Disimpulkan bahwa seseorang yang jika tidak ingin mencegah terkena penyakit cardiovascular harus menjaga tekanan darah diastoliknya dan menjaga kadar kolesterolnya dalam kadar normal.
+1. Berdasarkan data yang diperoleh, menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah sistolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur. Disimpulkan bahwa seseorang yang jika tidak ingin mencegah terkena penyakit cardiovascular harus menjaga tekanan darah sistoliknya dan menjaga kadar kolesterolnya dalam kadar normal.
 2. Seluruh penyandang cardiovascular memiliki kesamaan dalam beberapa faktor, yaitu
    * memiliki kadar glukosa lebih dari rata-rata batas normal.
    * memiliki kadar kolesterol lebih dari rata-rata batas normal.
