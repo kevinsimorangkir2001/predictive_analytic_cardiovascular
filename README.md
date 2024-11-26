@@ -47,6 +47,13 @@ smoke | 0: tidak merokok, 1: merokok
 alco | 0: tidak minum alkohol, 1: minum alkohol
 active | 0: tidak olahrga, 1: aktif olahraga
 cardio | 0: tidak terkena sakit cardio, 1: terkena sakit cardio
+id | kode unik responden
+
+| Jumlah Baris | Jumlah Kolom |
+| ------ | ------ |
+| 70000 | 13 |
+data yang digunakan diawal sebanyak 70.000 data dengan 14 kolom
+
 
 <img width="358" alt="umur" src="https://github.com/user-attachments/assets/d8cefb86-8c98-4362-a33d-144bb6049ca5">
 
@@ -73,7 +80,7 @@ max	| 2.000000	| 250.000000	| 200.000000	| 16020.000000 |	11000.000000	| 3.00000
 -` 75%` adalah kuartil ketiga.
 - `Max` adalah nilai maksimum.
 
-Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecakan lebih lanjut
+Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecekan lebih lanjut
 
 
 ### Univariate Analysis
