@@ -53,12 +53,35 @@ id | kode unik responden
 | ------ | ------ 
 | 70000 | 13 
 
-data yang digunakan diawal sebanyak 70.000 data dengan 14 kolom
+data yang digunakan diawal sebanyak 70.000 data dengan 13 kolom
 
+#### mengecek data duplikasi
+<img width="172" alt="duplikat" src="https://github.com/user-attachments/assets/2005640f-ba67-4ba6-bc40-9bae3dfb656c">
+<br>
 
-<img width="358" alt="umur" src="https://github.com/user-attachments/assets/d8cefb86-8c98-4362-a33d-144bb6049ca5">
+Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus.
 
-kolom age dihapus karena sudah diganti dengan umur ,sedangkan untuk kolom id dihapus karena tidak bermakna untuk pembentukan model di machine learning <br>
+#### mengecek missing values
+<img width="129" alt="cek_missing_value" src="https://github.com/user-attachments/assets/2fe66739-86e2-4777-a603-8ffc4acbacc7">
+<br>
+dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempengaruhi peforma machine learning. <br>
+
+<img width="164" alt="cek_missing_value_2" src="https://github.com/user-attachments/assets/a2b3b7cb-227d-437b-8cfc-84c9fa850d21"> <br>
+
+setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0 karena tidak mungkin memiliki tekanan darah diastolik 0 maka dalam ini dianggap sebagai missing value yang harus dihapus agar tidak mempengaruhi performa dari machine learning yang dibuat.
+
+#### mengecek outlier
+![sspa (1)](https://github.com/user-attachments/assets/d3ee1645-86fc-49da-817c-6080bf84fc76)
+
+Berikut adalah interpretasi dari boxplot di atas.
+1. Pada kolom `Umur`, dapat dilihat bahwa mayoritas responden berusia di rentang 48-58 tahun. Terdapat dua outlier, yaitu usia 30 tahun ke atas. Meski demikian, outlier ini tidak akan dihapus karena sangat memungkinkan seseorang berusia 30 tahun ke atas.
+2. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 60-80 kilogram. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil memungkinkan seseorang memiliki berat badan dengan rentang 20 kilogram hingga 35 kg pada umur 35 keatas.
+3. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,6-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
+4. Pada kolom `ap_hi`, dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
+5. Pada kolom `ap_lo`,  dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
+4. Pada kolom-kolom lainnya, dapat dilihat bahwa persebaran data merata dan tidak terdapat outlier yang signifikan.
+
+Untuk proses analisis ini, outlier akan ditangani karena sangat tidak memungkinkan responden termasuk dalam outlier tersebut karena bertentangan dengan penelitian yang ada dan hanya umur saja yang tidak akan dibuang.
 
 ### Deskripsi Statistik dari Data
 | 	| gender	| height	| weight	| ap_hi	| ap_lo	| cholesterol	| gluc	| smoke	| alco	| active	| cardio	| umur|
@@ -157,32 +180,34 @@ Dari heatmap di atas, dapat dilihat bahwa responden memiliki
 ## Data Preparation
 Pertama, akan diubah nilai-nilai kategorikal pada data menggunakan encoder sehingga menjadi nilai-nilai numerik agar dapat dilatih dengan *machine learning*.
 
-
 ### Data Cleaning
 Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tidak ada. Sementara itu, setelah diperiksa apakah terdapat data duplikat, ditemukan 3197 duplikat, sehingga data duplikat ini dihapus. Oleh karena itu, setelah dilakukan pembersihan data, diperoleh deskripsi statistik data numerik sebagai berikut. 
 
+#### Menghapus Kolom yang tidak digunakan
+![image](https://github.com/user-attachments/assets/1c01ac16-a5b7-4a32-9fb3-951689c6af27)
+
+kolom age dihapus karena sudah diganti dengan umur ,sedangkan untuk kolom id dihapus karena tidak bermakna untuk pembentukan model di machine learning maka yang akan digunakan dalam membuat model ialah 12 kolom dengan 70000 data.
 
 #### Menangani Duplikat 
-<img src = "gambar/duplikat.png"/> <br>
+
+<img width="172" alt="duplikat" src="https://github.com/user-attachments/assets/2005640f-ba67-4ba6-bc40-9bae3dfb656c">
+<br>
 
 Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus.
 
-<img src = "gambar/hapus_duplikat.png"/> <br>
+<img width="197" alt="hapus_duplikat" src="https://github.com/user-attachments/assets/4c3c856c-8f07-4597-a801-830db9be0f31"><br>
 setelah dicek terdapat 3197 data yang duplicated yang kemudian kita hapus agar tidak memprediksi hasil prediksi dengan menggunakan code diatas.
 
+
 #### Menangani Missing Values
-<img src = "gambar/cek_missing_value.png"/> <br>
 
-dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempengaruhi peforma machine learning. <br>
+<img width="159" alt="cek_missing_value_3" src="https://github.com/user-attachments/assets/1113685d-3e34-47c9-b52f-b579e47af21d"> <br>
 
-<img src = "gambar/cek_missing_value_2.png"/> <br>
-setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0 karena tidak mungkin memiliki tekanan darah diastolik 0 maka dalam ini dianggap sebagai missing value yang harus dihapus agar tidak mempengaruhi performa dari machine learning yang dibuat.
-
-<img src = "gambar/cek_missing_value_3.png"/> <br>
 setelah ditangani untuk setiap kolom yg dipilih tidak terdapat nilai 0. selanjutnya diperlukan penanganan outlier dilihat statistik data yang tidak sesuai dengan penelitian.
 
 #### Menangani Outliers
-<img src = "gambar/boxplot_after.png"/> <br>
+![boxplot_after](https://github.com/user-attachments/assets/1701d20d-f9a7-4e0c-af98-a5b3ea1db17a) <br>
+
 
 boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
 
