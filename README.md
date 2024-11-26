@@ -49,9 +49,10 @@ active | 0: tidak olahrga, 1: aktif olahraga
 cardio | 0: tidak terkena sakit cardio, 1: terkena sakit cardio
 id | kode unik responden
 
-| Jumlah Baris | Jumlah Kolom |
-| ------ | ------ |
-| 70000 | 13 |
+| Jumlah Baris | Jumlah Kolom 
+| ------ | ------ 
+| 70000 | 13 
+
 data yang digunakan diawal sebanyak 70.000 data dengan 14 kolom
 
 
