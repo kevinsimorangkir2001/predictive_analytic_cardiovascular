@@ -301,11 +301,12 @@ Setelah semua model dijalankan, penulis memilih algoritma *XGBoosting* sebagai m
 
 Pada proyek ini, penilaian model menggunakan confusion matrix, akurasi, dan f1 score sebagai metrik evaluasi untuk masing-masing model. Akan dijelaskan terlebih dahulu bagaimana cara mendapatkan akurasi dan f1 score serta bagaimana cara menggunakan confusion matrix.
 
+
 ### Sekilas Tentang Matriks Confusion, Akurasi, dan Skor f1
 
 Matriks Confusion merupakan sebuah tabel untuk mengukur akurasi dari model klasifikasi. Contoh dari Matriks Confusion beserta labelnya dapat dilihat pada gambar di bawah ini. 
 
-<img src = "gambar/Confusion_Matrix_5.png"/> <br>
+![Confusion_Matrix_5](https://github.com/user-attachments/assets/6c8ec441-ffcc-4d50-9904-520a82f90946) <br>
 
 Setiap baris pada matriks confusion merepresentasikan nilai sesungguhnya, sedangkan setiap kolom pada matriks confusion merepresentasikan nilai yang diprediksi. Terdapat 4 label pada matriks confusion seperti yang terlihat di gambar, yaitu TP, TN, FP, dan FN.
 1. *True Positive* (TP) merupakan jumlah data pada positif yang ditebak dengan benar.
@@ -315,16 +316,16 @@ Setiap baris pada matriks confusion merepresentasikan nilai sesungguhnya, sedang
 
 Selanjutnya, metrik evaluasi yang digunakan berdasarkan label-label yang diketahui dari matriks confusion ada 4, yaitu sebagai berikut.
 1. Akurasi (*Accuracy*) merupakan proporsi data yang berhasil diprediksi dengan benar dari seluruh data yang diprediksi. Akurasi dirumuskan sebagai <br>
-<img src = "gambar/Rumus_Akurasi.png"/> <br>
+![Rumus_Akurasi](https://github.com/user-attachments/assets/790eeb4f-01a9-455c-927e-e14328677eec) <br>
 
 2. *Precision* merupakan proporsi data positif yang berhasil diprediksi dengan benar dari seluruh data yang diprediksi positif. *Precision* dirumuskan sebagai <br>
-<img src = "gambar/Rumus_Precision.png"/> <br>
+![Rumus_Precision](https://github.com/user-attachments/assets/046dc13c-5ba2-4de7-bf22-8e5c4afd031a) <br>
 
 3. *Recall* merupakan proporsi data positif yang berhasil diprediksi dengan benar dari seluruh data yang aslinya positif. *Recall* dirumuskan sebagai <br>
-<img src = "gambar/Rumus_Recall.png"/> <br>
+![Rumus_Recall](https://github.com/user-attachments/assets/c0353cdf-08a8-452d-b218-a3fef1ac3e12) <br>
 
 4. Skor F1 (F1 *score*) merupakan rata-rata harmonik dari *precision* dan *recall* untuk mendapatkan sebuah metrik yang seimbang. Skor F1 dirumuskan sebagai <br>
-<img src = "gambar/Rumus_SkorF1.png"/> <br>
+![Rumus_SkorF1](https://github.com/user-attachments/assets/9dfa59db-b969-4255-aa75-3d178a110705) <br>
 
 ### Penerapan Matriks Confusion, Akurasi, dan Skor f1
 
