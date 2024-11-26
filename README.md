@@ -29,7 +29,7 @@ Berdasarkan problem statements, berikut tujuan yang ingin dicapai pada proyek in
 3. Menggunakan confusion matrix dan f1 score pada masing-masing model *machine learning* untuk menemukan model terbaik berdasarkan akurasi tertinggi.
 
 ## Data Understanding
-Dataset yang digunakan untuk memprediksi seseorang *cardiovascular* pada responden diambil dari platform [kaggle](https://www.kaggle.com/) yang dipublikasikan oleh ARAVINDPCODER dengan usability score 10/10. Data ini didapat dari survei menggunakan platform web kepada orang-orang noncardiovascular dan orang cardiovascular dengan usia di rentang 30 hingga 65 tahun dan dari berbagai jenis kegiatan fisik serta rekam medis responden . Dataset ini terdiri dari 1 file csv.<br>
+Dataset yang digunakan untuk memprediksi seseorang *cardiovascular* pada responden diambil dari platform [kaggle](https://www.kaggle.com/) yang dipublikasikan oleh Svetlana Ulianova dengan usability score 6.47/10. Data ini didapat dari survei menggunakan platform web kepada orang-orang noncardiovascular dan orang cardiovascular dengan usia di rentang 30 hingga 65 tahun dan dari berbagai jenis kegiatan fisik serta rekam medis responden . Dataset ini terdiri dari 1 file csv.<br>
 
 ### Informasi Keterangan Variabel pada Data
 Dataset ini memiliki 12 variabel dengan keterangan sebagai berikut.
