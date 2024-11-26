@@ -6,7 +6,7 @@ Penyakit cardiovascular merupakan jenis penyakit jantung yang disebabkan kurang 
 
 Pada zaman sekarang, teknologi telah berkembang pesat, salah satunya adalah teknologi *machine learning*. *machine learning* telah digunakan ke dalam berbagai bidang, salah satunya bidang kesehatan. *machine learning* mampu mendeteksi berbagai macam penyakit dengan berbagai parameter maupun faktor yang diberikan, salah satunya adalah mendeteksi cardiovascular. Oleh sebab itu, pada proyek ini, penulis ingin memanfaatkan *machine learning* untuk mendeteksi terkena cardiovascular pada seseorang, terutama yang didiagnosis mengalami obesitas agar dapat icegah. Penulis ingin memprediksi penyakit cardiovascular pada responden menggunakan 7 model, yaitu *Extreme Gradient Boosting* (XGBoost), *Support Vector Machine* (SVM), *K-Nearest Neighbors* (KNN), *AdaBoosting*,*Catboosting*,*Decision Tree*, dan *Random Forest*. Penulis menggunakan dataset dari Kaggle yang dapat diakses pada link [berikut](https://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset).
 
-<img src = "gambar/cardiovascular.jpg"/> <br>
+![cardiovascular](https://github.com/user-attachments/assets/6796a8f5-b2a8-401f-ac98-c2de7cf7e20b)
 
 ## Business Understanding
 
@@ -48,8 +48,7 @@ alco | 0: tidak minum alkohol, 1: minum alkohol
 active | 0: tidak olahrga, 1: aktif olahraga
 cardio | 0: tidak terkena sakit cardio, 1: terkena sakit cardio
 
-
-<img src = "gambar/umur.png"/> <br>
+<img width="358" alt="umur" src="https://github.com/user-attachments/assets/d8cefb86-8c98-4362-a33d-144bb6049ca5">
 
 kolom age dihapus karena sudah diganti dengan umur ,sedangkan untuk kolom id dihapus karena tidak bermakna untuk pembentukan model di machine learning <br>
 
@@ -85,7 +84,6 @@ Kolom-kolom kategorikal: ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'acti
 Pertama, kita akan memvisualisasikan kolom-kolom kategorikal untuk melihat jumlah-jumlah nilai kategorikal menggunakan bar plot.
 
 ![analisis_kategorik](https://github.com/user-attachments/assets/75c9afc2-8297-453d-912f-6b2fc1e8b5d1)
-<img src = "gambar/analisis_kategorik.png"/> <br>
 
 Gambar di atas dapat diinterpretasikan sebagai berikut.
 1. Dari `Plot Jumlah dari Riwayat terkena penyakit cardiovascular`, responden yang dijadikan responden imbang antara terkena cardiovascular dan non cardiovascular.
@@ -96,7 +94,8 @@ Gambar di atas dapat diinterpretasikan sebagai berikut.
 6. Dari `Plot Jumlah dari meminum alkohol`, sebagian besar responden terkadang tidak minum alkohol dan sebagian kecil responden meminum alkohol.
 7. Dari `Plot Jumlah dari aktif bergerak`, mayoritas responden menggunakan sudah aktif bergerak dibandingkan tidak aktif bergerak
 
-<img src = "gambar/analisis_numerik.png"/> <br>
+![analisis_numerik](https://github.com/user-attachments/assets/ffeb7801-4b53-49ae-bae6-dbd279f92263) <br>
+
 
 Gambar di atas dapat diinterpretasikan sebagai berikut.
 1. Plot Histogram dari `Height`, `Weight`, `ap_hi`,`ap_lo` berdistribusi normal.
