@@ -159,13 +159,13 @@ Setelah diperiksa apakah terdapat kolom yang bernilai null, hasilnya adalah tida
 
 Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus.
 
-<img src = "gambar/hapus duplikat.png"/> <br>
+<img src = "gambar/hapus_duplikat.png"/> <br>
 setelah dicek terdapat 3197 data yang duplicated yang kemudian kita hapus agar tidak memprediksi hasil prediksi dengan menggunakan code diatas.
 
 #### Menangani Missing Values
 <img src = "gambar/cek_missing_value.png"/> <br>
 
-dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempenagaruhi peforma machine learning. <br>
+dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempengaruhi peforma machine learning. <br>
 
 <img src = "gambar/cek_missing_value_2.png"/> <br>
 setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0 karena tidak mungkin memiliki tekanan darah diastolik 0 maka dalam ini dianggap sebagai missing value yang harus dihapus agar tidak mempengaruhi performa dari machine learning yang dibuat.
@@ -239,7 +239,7 @@ Pada pemodelan ini, *Decision Tree* diimplementasikan menggunakan `DecisionTreeC
 
 Algoritma ini bekerja dengan mengklasifikasikan titik data berdasarkan kelas mayoritas dari sejumlah k tetangga terdekatnya. Kelebihan dari algoritma ini adalah mudah dan simple untuk digunakan, tidak ada fase *lazy learning* sehingga cepat, dan efektif. Sementara itu, kekurangan dari algoritma ini adalah sensitif terhadap pemilihan k dan metrik jarak serta memiliki performa buruk untuk data berdimensi tinggi (*curse of dimensionality*). <br>
 
-Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsClassif/ier` dari library `sklearn.neighbors` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_neighbors` yaitu jumlah k tetangga. Pada proyek ini, parameter yang digunakan adalah `n_neighbors = 20`.
+Pada pemodelan ini, KNN diimplementasikan menggunakan `KNeighborsClassifier` dari library `sklearn.neighbors` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `n_neighbors` yaitu jumlah k tetangga. Pada proyek ini, parameter yang digunakan adalah `n_neighbors = 20`.
 
 ### 5. ***Random Forest***
 
@@ -287,7 +287,7 @@ Pada pemodelan ini, *CatBoosting* diimplementasikan menggunakan `CatBoostClassif
 
 ### 5. Pemilihan Model
 
-Setelah semua model dijalankan, penulis memilih algoritma *Random Forest* sebagai model terbaik yang akan digunakan sebagai solusi untuk memprediksi obesitas karena model ini memiliki akurasi dan skor f1 tertinggi dibandingkan model lainnya, serta kesalahan klasifikasi pada matriks confusion yang lebih kecil dibanding model lainnya. Penjelasan lebih lengkap mengenai alasan ini ada di bagian selanjutnya, yaitu **evaluation**.
+Setelah semua model dijalankan, penulis memilih algoritma *XGBoosting* sebagai model terbaik yang akan digunakan sebagai solusi untuk memprediksi penyakit cardiovascular karena model ini memiliki akurasi dan skor f1 tertinggi dibandingkan model lainnya, serta kesalahan klasifikasi pada matriks confusion yang lebih kecil dibanding model lainnya. Penjelasan lebih lengkap mengenai alasan ini ada di bagian selanjutnya, yaitu **evaluation**.
 
 ## Evaluation
 
@@ -390,7 +390,7 @@ Dari gambar di atas, terdapat 2079 data diklasifikasikan salah sebagai responden
 dan 2749 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 73.12%.
 
 #### Hasil Evaluasi
-Dari seluruh akurasi yang diketahui dari keempat model, dibentuk bar plot untuk melihat perbandingan nilai akurasi model sebagai berikut. 
+Dari seluruh akurasi yang diketahui dari ketujuh model, dibentuk bar plot untuk melihat perbandingan nilai akurasi model sebagai berikut. 
 
 <img src = "gambar/Barplot_4.png"/> <br>
 
