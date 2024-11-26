@@ -126,7 +126,7 @@ from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, classificati
 tahap untuk memuat dataset yang akan digunakan agar dataset lebih mudah dipahami.
 """
 
-# Import module yang disediakan google colab untuk kebutuhan upload file
+# Import module yang disediakan google colab untuk kebutuhan upload file credentials
 from google.colab import files
 files.upload()
 
@@ -189,13 +189,18 @@ data.info()
 data['umur'] = data['age']/365
 data['umur'] = data['umur'].apply(math.ceil)
 
+"""penjelasan:
+
+data umur diubah dari harian menjadi tahun agar mudah menganalisis dengan cara dibagi 365
+"""
+
 #menghapus kolom id karena tidak digunakan
 data.drop(columns=['id'], inplace=True)
 data.drop(columns=['age'], inplace=True)
 
 """penjelasan:
 
-data umur diubah dari harian menjadi tahun agar mudah menganalisis dengan cara dibagi 365
+kolom age dihapus karena sudah diganti dengan umur ,sedangkan untuk kolom id dihapus karena tidak bermakna untuk pembentukan model di machine learning
 """
 
 data.shape
@@ -209,80 +214,16 @@ data.shape
 
 
 <br>
-
-## Exploratory Data Analysis - Menangani Missing Value dan Outliers
 """
 
-data.duplicated().sum()
+#membuat data frame
+#agar tidak memenuhi source
+df_filtered = pd.DataFrame(data)
 
-# Menampilkan data duplikat
-data[data.duplicated]
+"""### Deskripsi Statistik dari Data"""
 
-"""Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus."""
-
-df_cleaned = data.drop_duplicates()
-
-"""setelah dicek terdapat 3197 data yang duplicated yang kemudian kita hapus agar tidak memprediksi hasil prediksi"""
-
-df_cleaned.isnull().sum()
-
-"""penjelasan:
-
-dari output diatas didapati bahwa tidak terdapat missing value pada dataset.
-"""
-
-df_cleaned
-
-ag = (df_cleaned['umur'] == 0).sum()
-gender = (df_cleaned['gender'] == 0).sum()
-hei = (df_cleaned['height'] == 0).sum()
-wei = (df_cleaned['weight'] == 0).sum()
-hi = (df_cleaned['ap_hi'] == 0).sum()
-lo = (df_cleaned['ap_lo'] == 0).sum()
-coles = (df_cleaned['cholesterol'] == 0).sum()
-glu = (df_cleaned['gluc'] == 0).sum()
-
-
-print("Nilai 0 di kolom umur: ", ag)
-print("Nilai 0 di kolom gender: ", gender)
-print("Nilai 0 di kolom height: ", hei)
-print("Nilai 0 di kolom weight: ", wei)
-print("Nilai 0 di kolom ap_hi: ", hi)
-print("Nilai 0 di kolom ap_lo: ", lo)
-print("Nilai 0 di kolom chlosterol: ", coles)
-print("Nilai 0 di kolom gluc: ", glu)
-
-"""setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0"""
-
-df_cleaned = df_cleaned[df_cleaned['ap_lo'] != 0]
-
-"""kode diatas untuk menghapus tiap baris yang nilai kolom ap_lo 0"""
-
-ag = (df_cleaned['umur'] == 0).sum()
-gender = (df_cleaned['gender'] == 0).sum()
-hei = (df_cleaned['height'] == 0).sum()
-wei = (df_cleaned['weight'] == 0).sum()
-hi = (df_cleaned['ap_hi'] == 0).sum()
-lo = (df_cleaned['ap_lo'] == 0).sum()
-coles = (df_cleaned['cholesterol'] == 0).sum()
-glu = (df_cleaned['gluc'] == 0).sum()
-
-
-print("Nilai 0 di kolom umur: ", ag)
-print("Nilai 0 di kolom gender: ", gender)
-print("Nilai 0 di kolom height: ", hei)
-print("Nilai 0 di kolom weight: ", wei)
-print("Nilai 0 di kolom ap_hi: ", hi)
-print("Nilai 0 di kolom ap_lo: ", lo)
-print("Nilai 0 di kolom chlosterol: ", coles)
-print("Nilai 0 di kolom gluc: ", glu)
-
-"""setelah ditangani untuk setiap kolom yg dipilih tidak terdapat nilai 0.
-
-### Deskripsi Statistik dari Data
-"""
-
-df_cleaned.describe()
+# memanggil untuk statistik data mengecek outlier.
+df_filtered.describe()
 
 """Fungsi `describe()` memberikan informasi statistik pada masing-masing kolom, antara lain:
 
@@ -296,67 +237,12 @@ df_cleaned.describe()
 - `Max` adalah nilai maksimum.
 
 Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecakan lebih lanjut
-"""
-
-df_cleaned.shape
-
-"""total data menjadi 66782 baris
-
-### Menangani Outliers
-
-menangani outliers dengan IQR Method
-"""
-
-#Cek data outlier
-numerical_feature = ['umur', 'height', 'weight', 'ap_hi', 'ap_lo']
-categorical_feature = ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio']
-
-for num in numerical_feature:
-    plt.figure(figsize=(10, 5))
-    sns.boxplot(data=df_cleaned, x=num, color='skyblue')
-    plt.title(f'Boxplot of {num}')
-    plt.xlabel(num)
-    plt.show()
-
-"""Berikut adalah interpretasi dari boxplot di atas.
-1. Pada kolom `Umur`, dapat dilihat bahwa mayoritas responden berusia di rentang 48-58 tahun. Terdapat dua outlier, yaitu usia 30 tahun ke atas. Meski demikian, outlier ini tidak akan dihapus karena sangat memungkinkan seseorang berusia 30 tahun ke atas.
-2. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 60-80 kilogram. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil memungkinkan seseorang memiliki berat badan dengan rentang 20 kilogram hingga 35 kg pada umur 35 keatas.
-3. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,6-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
-4. Pada kolom `ap_hi`, dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
-5. Pada kolom `ap_lo`,  dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
-4. Pada kolom-kolom lainnya, dapat dilihat bahwa persebaran data merata dan tidak terdapat outlier yang signifikan.
-
-Untuk proses analisis ini, outlier akan ditangani karena sangat tidak memungkinkan responden termasuk dalam outlier tersebut karena bertentangan dengan penelitian yang ada dan hanya umur saja yang tidak akan dibuang.
-"""
-
-#Cek data outlier
-numerical_features = [ 'height', 'weight', 'ap_hi', 'ap_lo']
-selected_cols = df_cleaned[numerical_features]
-
-Q1 = selected_cols.quantile(0.25)
-Q3 = selected_cols.quantile(0.75)
-IQR = Q3 - Q1
-
-df_filtered = df_cleaned[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]
-
-for num in numerical_features:
-    plt.figure(figsize=(10, 5))
-    sns.boxplot(data=df_filtered, x=num, color='skyblue')
-    plt.title(f'Boxplot of {num}')
-    plt.xlabel(num)
-    plt.show()
-
-df_filtered.shape
-
-"""dataset kini menjadi 59.787 baris setelah penghapusan outlier dan visualisasi boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
-
-1. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 65-85 kilogram. Terdapat beberapa outlier. meski demikian, outlier ini akan tidak dihapus karena memungkinan memiliki berat 110 kg.
-2. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,55-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
-3. Pada kolom `ap_hi`, dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 120 mmHg - 140 mmHg.
-4. Pada kolom `ap_lo`,  dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 80 mmHg - 90 mmHg.
 
 ## Exploratory Data Analysis - Univariate Analysis
 """
+
+numerical_feature = ['umur', 'height', 'weight', 'ap_hi', 'ap_lo']
+categorical_feature = ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio']
 
 feature = categorical_feature
 count = df_filtered[feature].value_counts()
@@ -432,6 +318,8 @@ plt.show()
 ## Exploratory Data Analysis - Multivariate Analysis
 
 ### membandingkan kondisi kesehatan jantung dengan jenis kelamin
+
+code dibawah untuk mempermudah analisis maka diubah dari numerik menjadi kategorik
 """
 
 # Mapping for "cholesterol" and "gluc"
@@ -558,6 +446,152 @@ plt.title("Correlation Matrix untuk Fitur Numerik ", size=20)
 4. Korelasi positif yang lemah terhadap tekanan diastolik.
 
 # Data Preparation
+
+### Data Cleaning
+
+#### Menangani Data Duplikat
+"""
+
+df_filtered.duplicated().sum()
+
+# Menampilkan data duplikat
+df_filtered[df_filtered.duplicated]
+
+"""Dari hasil di atas, terlihat bahwa ada data-data tersebut memang terduplikasi. Oleh karena itu, data duplikat ini akan dihapus."""
+
+df_cleaned = df_filtered.drop_duplicates()
+
+"""setelah dicek terdapat 3197 data yang duplicated yang kemudian kita hapus agar tidak memprediksi hasil prediksi
+
+#### Menangani Missing Value
+"""
+
+df_cleaned.isnull().sum()
+
+"""penjelasan:
+
+dari output diatas didapati bahwa tidak terdapat missing value pada dataset, tetapi harus dicek apakah terdapat nilai nol pada tiap kolom karena tidak mungkin nilai pada kolom gender, weight, aphi, aplo,cholesterol, dan glukosa bisa menjadi missing value yang diassign 0 dapat mempenagaruhi peforma machine learning.
+"""
+
+ag = (df_cleaned['umur'] == 0).sum()
+gender = (df_cleaned['gender'] == 0).sum()
+hei = (df_cleaned['height'] == 0).sum()
+wei = (df_cleaned['weight'] == 0).sum()
+hi = (df_cleaned['ap_hi'] == 0).sum()
+lo = (df_cleaned['ap_lo'] == 0).sum()
+coles = (df_cleaned['cholesterol'] == 0).sum()
+glu = (df_cleaned['gluc'] == 0).sum()
+
+
+print("Nilai 0 di kolom umur: ", ag)
+print("Nilai 0 di kolom gender: ", gender)
+print("Nilai 0 di kolom height: ", hei)
+print("Nilai 0 di kolom weight: ", wei)
+print("Nilai 0 di kolom ap_hi: ", hi)
+print("Nilai 0 di kolom ap_lo: ", lo)
+print("Nilai 0 di kolom chlosterol: ", coles)
+print("Nilai 0 di kolom gluc: ", glu)
+
+"""setelah dicek untuk setiap kolom yg dipilih terdapat nilai 0 pada kolom ap_lo maka sebanyak 21. maka kita akan mendrop baris yang nilai kolom ap_lo = 0 karena tidak mungkin memiliki tekanan darah diastolik 0 maka dalam ini dianggap sebagai missing value yang harus dihapus agar tidak mempengaruhi performa dari machine learning yang dibuat."""
+
+df_cleaned = df_cleaned[df_cleaned['ap_lo'] != 0]
+
+"""kode diatas untuk menghapus tiap baris yang nilai kolom ap_lo 0"""
+
+ag = (df_cleaned['umur'] == 0).sum()
+gender = (df_cleaned['gender'] == 0).sum()
+hei = (df_cleaned['height'] == 0).sum()
+wei = (df_cleaned['weight'] == 0).sum()
+hi = (df_cleaned['ap_hi'] == 0).sum()
+lo = (df_cleaned['ap_lo'] == 0).sum()
+coles = (df_cleaned['cholesterol'] == 0).sum()
+glu = (df_cleaned['gluc'] == 0).sum()
+
+
+print("Nilai 0 di kolom umur: ", ag)
+print("Nilai 0 di kolom gender: ", gender)
+print("Nilai 0 di kolom height: ", hei)
+print("Nilai 0 di kolom weight: ", wei)
+print("Nilai 0 di kolom ap_hi: ", hi)
+print("Nilai 0 di kolom ap_lo: ", lo)
+print("Nilai 0 di kolom chlosterol: ", coles)
+print("Nilai 0 di kolom gluc: ", glu)
+
+"""setelah ditangani untuk setiap kolom yg dipilih tidak terdapat nilai 0. selanjutnya pengecaean apakah perlu penanganan outlier dengan statistik data.
+
+#### Menangani Outliers
+
+menangani outliers dengan IQR Method
+"""
+
+# memanggil untuk statistik data setelah dihapus data duplikat dan missing value.
+df_cleaned.describe()
+
+"""Fungsi `describe()` memberikan informasi statistik pada masing-masing kolom, antara lain:
+
+- `Count` adalah jumlah sampel pada data.
+- `Mean` adalah nilai rata-rata.
+- `Std` adalah standar deviasi.
+- `Min` yaitu nilai minimum setiap kolom.
+- `25%` adalah kuartil pertama. Kuartil adalah nilai yang menandai batas interval dalam empat bagian sebaran yang sama.
+- `50%` adalah kuartil kedua, atau biasa juga disebut median (nilai tengah).
+-` 75%` adalah kuartil ketiga.
+- `Max` adalah nilai maksimum.
+
+Dari hasil tersebut, dapat disimpulkan bahwa responden memiliki rentang usia 30-65 tahun dengan tinggi rentang 0.5-2.5 meter dan berat rentang 10-200 kilogram, sedangkan tekanan sistolik -150 hingga 16020 dan diastolik -70 hingga 11000. Dari hasil tersebut, kita perlu melakukan hapus outlier dan pengecakan lebih lanjut
+"""
+
+df_cleaned.shape
+
+"""total data menjadi 66782 baris"""
+
+#Cek data outlier
+numerical_feature = ['umur', 'height', 'weight', 'ap_hi', 'ap_lo']
+categorical_feature = ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio']
+
+#Cek data outlier
+numerical_features = [ 'height', 'weight', 'ap_hi', 'ap_lo']
+selected_cols = df_cleaned[numerical_features]
+
+Q1 = selected_cols.quantile(0.25)
+Q3 = selected_cols.quantile(0.75)
+IQR = Q3 - Q1
+
+df_filtered = df_cleaned[~((selected_cols < (Q1 - 1.5 * IQR)) | (selected_cols > (Q3 + 1.5 * IQR))).any(axis=1)]
+
+for num in numerical_feature:
+    plt.figure(figsize=(10, 5))
+    sns.boxplot(data=df_cleaned, x=num, color='skyblue')
+    plt.title(f'Boxplot of {num}')
+    plt.xlabel(num)
+    plt.show()
+
+"""Berikut adalah interpretasi dari boxplot di atas.
+1. Pada kolom `Umur`, dapat dilihat bahwa mayoritas responden berusia di rentang 48-58 tahun. Terdapat dua outlier, yaitu usia 30 tahun ke atas. Meski demikian, outlier ini tidak akan dihapus karena sangat memungkinkan seseorang berusia 30 tahun ke atas.
+2. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 60-80 kilogram. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil memungkinkan seseorang memiliki berat badan dengan rentang 20 kilogram hingga 35 kg pada umur 35 keatas.
+3. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,6-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
+4. Pada kolom `ap_hi`, dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
+5. Pada kolom `ap_lo`,  dapat dilihat bahwa terdapat banyak outlier. Dengan demikian, outlier ini akan dihapus karena tidak mungkin seseorang memiliki tekanan darah lebih dari 500 mmHg dan minus.
+4. Pada kolom-kolom lainnya, dapat dilihat bahwa persebaran data merata dan tidak terdapat outlier yang signifikan.
+
+Untuk proses analisis ini, outlier akan ditangani karena sangat tidak memungkinkan responden termasuk dalam outlier tersebut karena bertentangan dengan penelitian yang ada dan hanya umur saja yang tidak akan dibuang.
+"""
+
+for num in numerical_features:
+    plt.figure(figsize=(10, 5))
+    sns.boxplot(data=df_filtered, x=num, color='skyblue')
+    plt.title(f'Boxplot of {num}')
+    plt.xlabel(num)
+    plt.show()
+
+df_filtered.shape
+
+"""dataset kini menjadi 59.787 baris setelah penghapusan outlier dan visualisasi boxplot setelah dilakukan penghapusan outlier diketahui bahwa:
+
+1. Pada kolom `Weight`, dapat dilihat bahwa mayoritas responden memiliki berat badan di rentang 65-85 kilogram. Terdapat beberapa outlier. meski demikian, outlier ini akan tidak dihapus karena memungkinan memiliki berat 110 kg.
+2. Pada kolom `Height`, dapat dilihat bahwa mayoritas responden memiliki tinggi badan di rentang 1,55-1,7 meter. Terdapat banyak outlier. Dengan demikian, outlier ini akan ditangani karena sangat kecil kemungkinan umur 30 keatas memiliki rentang 0,5 meter hingga 1 meter.
+3. Pada kolom `ap_hi`, dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 120 mmHg - 140 mmHg.
+4. Pada kolom `ap_lo`,  dapat dilihat bahwa rentang tekanan darah diastolik responden rentang 80 mmHg - 90 mmHg.
 
 ## Encoding Kategorikal
 
@@ -846,7 +880,7 @@ study.optimize(objective, n_trials=500)  # Run the optimization for 50 trials
 print("Best hyperparameters: ", study.best_params)
 print("Best accuracy: ", study.best_value)
 
-# Memanggil fungsi KNeighborsClassifier dari library sklearn
+# Memanggil fungsi DecisionTreeClassifier dari library sklearn
 model_dt = DecisionTreeClassifier(min_samples_leaf= 26, min_samples_split= 45, max_depth= 9,max_features=None)
 
 # Melatih model KNN dengan data training pada X dan y
@@ -1074,7 +1108,7 @@ for index, value in enumerate(models["Akurasi"]):
     barplot.text(index, value + 0.02, f"{value:.4f}", color = "black", ha = "center")
 
 # Menambahkan judul pada plot
-plt.title("Perbandingan Akurasi dari Keempat Model")
+plt.title("Perbandingan Akurasi dari Ketujuh Model")
 
 # Menambahkan label sumbu x dan y pada plot
 plt.xlabel("Model")
@@ -1106,7 +1140,7 @@ Menggunakan XGBoost dimaknai:
 feat_importances = pd.Series(model_xgb.feature_importances_,index=X.columns)
 feat_importances.nlargest(10).plot(kind='barh')
 
-"""makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah diastolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur. Disimpulkan bahwa seseorang yang jika tidak ingin mencegah terkena penyakit cardiovascular harus menjaga tekanan darah diastoliknya dan menjaga kadar kolesterolnya dalam kadar normal
+"""makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah sistolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur. Disimpulkan bahwa seseorang yang jika tidak ingin mencegah terkena penyakit cardiovascular harus menjaga tekanan darah sistoliknya dan menjaga kadar kolesterolnya dalam kadar normal
 
 # Referensi
 
