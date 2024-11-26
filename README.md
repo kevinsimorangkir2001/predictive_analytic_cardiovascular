@@ -138,37 +138,43 @@ Gambar di atas dapat diinterpretasikan sebagai berikut.
 
 #### 1. membandingkan kondisi kesehatan jantung dengan jenis kelamin
 
-<img src = "gambar/barplot_gender.png"/> <br>
-
+![barplot_gender](https://github.com/user-attachments/assets/1b3f9f55-2f5a-416a-a077-4802396d3a39)
+<br>
 Dari gambar di atas, dapat disimpulkan bahwa
 1. Penyakit cardiovascular didonmiasi oleh perempuan dibandingkan laki-laki.
 2. responden yang tidak terkena penyakit cardiovascular juga masih didominasi oleh perempuan.
 
 #### 2. membandingkan kondisi kesehatan jantung dengan umur
 
-<img src = "gambar/plotstrip_usia.png"/> <br>
+![plotstrip_usia](https://github.com/user-attachments/assets/12424969-f6ec-4fa4-ae8f-472c86685143)
+<br>
+
+
 Dari gambar di atas, disimpulkan bahwa
 1. Seluruh responden terkena cardiovascular berusia diatas 40 tahun.
 2. Seluruh responden non cardiovascular direntang 30-65 tahun.
 
 #### 3. Membandingkan kondisi kesehatan jantung dengan tingkat kadar gula
 
-<img src = "gambar/tumpuk_glukosa.png"/> <br>
+![tumpuk_glukosa](https://github.com/user-attachments/assets/3c484f7b-a389-4727-80b6-60784c75051e)
+<br>
+
 Dari gambar di atas, disimpulkan bahwa:
 1. Mayoritas kadar glukosaa normal banyak yang tidak terkena cardiovascular dibandingkan dengan yang terkenan cardiovascular.
 2. penyandang cardiovascular yang memiliki kadar glukosa melebihi diatas rata-rata naik cukup signifikan 2 kali lipat dibandingkan yang noncardiocascular.
 
 #### 4. membandingkan kondisi kesehatan jantung dengan tingkat kadar kolesterol
 
-<img src = "gambar/tumpuk_kolesterol.png"/> <br>
-
+![tumpuk_kolesterol](https://github.com/user-attachments/assets/99bc4d8a-903e-4d75-9218-bf45ec2482af)
+<br>
 Dari gambar di atas, disimpulkan bahwa
 1. Mayoritas kadar kolesterol normal banyak yang tidak terkena cardiovascular.
 2. penyandang cardiovascular yang memiliki kadar kolesterol melebihi diatas rata-rata naik cukup signifikan dibandingkan yang noncardiocascular.
 
 #### 5. Melihat Korelasi Variabel dengan Menggunakan Heatmap
 
-<img src = "gambar/kolerasi_variabel.png"/> <br>
+![kolerasi_variabel](https://github.com/user-attachments/assets/b3b84f39-7d13-473d-9011-fa6bbd29ec95)
+<br>
 
 Dari heatmap di atas, dapat dilihat bahwa responden memiliki
 1. Korelasi positif yang cukup kuat dengan tinggi dibandingkan faktor numerik lain.
@@ -253,7 +259,7 @@ Ada 7 algoritma *Machine Learning* yang digunakan untuk membuat model, yaitu seb
 
 Algoritma ini bekerja dengan mengimplementasikan *decision tree* yang kemudian ditingkatkan dengan gradien untuk meningkatkan kecepatan dan kinerja. Kelebihan dari algoritma ini adalah memiliki performa dan efisiensi tinggi, efektif untuk dataset bberukuran besar, dan memiliki parameter regularisasi yang mampu mencegah *overfitting*. Sementara itu, kekurangan dari algoritma ini adalah membutuhkan ketelitian terhadap hyperparameter tuning untuk mencegah *overfitting* dan komputasi yang mahal serta membutuhkan memori yang besar untuk dataset berukuran besar. <br>
 
-Pada pemodelan ini, XGBoost diimplementasikan menggunakan `XGBClassifier` dari library `xgboost` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `max_depth` yaitu kedalaman maksimum setiap tree, `n_estimators` yaitu jumlah tree yang akan dibuat, `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi, `learning rate` yaitu mengatur langkah setiap iterasi ketika meminimumkan *loss function*, dan `n_jobs` yaitu mengatur jumlah CPU threads untuk menjalankan XGBoost. Pada proyek ini, parameter yang digunakan adalah `max_depth = 4`, `n_estimators = 118`, `random_state = 30`, `learning_rate = 0.0701335604673830`, `n_jobs = -1`.
+Pada pemodelan ini, XGBoost diimplementasikan menggunakan `XGBClassifier` dari library `xgboost` dengan memasukkan `X_train` dan `y_train` untuk melatih model, lalu menggunakan `X_test` dan `y_test` untuk menguji model dengan data testing yang tidak ada di data training. Parameter yang digunakan pada model ini adalah `max_depth` yaitu kedalaman maksimum setiap tree, `n_estimators` yaitu jumlah tree yang akan dibuat, `random_state` yaitu mengontrol seed acak yang diberikan pada setiap iterasi, `learning rate` yaitu mengatur langkah setiap iterasi ketika meminimumkan *loss function*, dan `n_jobs` yaitu mengatur jumlah CPU threads untuk menjalankan XGBoost. Pada proyek ini, parameter yang digunakan adalah `max_depth = 4`, `n_estimators = 86`, `random_state = 118`, `learning_rate = 0.0701335604673830`, `n_jobs = -1`.
 
 ### 2. ***Logistik Regresion***
 
@@ -358,7 +364,9 @@ Selanjutnya, metrik evaluasi yang digunakan berdasarkan label-label yang diketah
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model XGBoost
 
-<img src = "gambar/akurasi_xgb.png"/> <br>
+![akurasi_xgb](https://github.com/user-attachments/assets/471fb069-b5ff-4fa9-a7aa-7c7fee75d727)
+<br>
+
 
 Dari gambar di atas, terdapat 1996 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2791 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 73.31%.
@@ -367,7 +375,8 @@ dan 2791 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model SVM
 
-<img src = "gambar/akurasi_lg.png"/> <br>
+![akurasi_lg](https://github.com/user-attachments/assets/e11e90ac-f240-40f0-aac2-e2dc48004bcf)
+<br>
 
 Dari gambar di atas, terdapat 2914 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2015 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 72.53%.
@@ -376,8 +385,8 @@ dan 2015 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model KNN
 
-<img src = "gambar/knn.png"/> <br>
-<img src = "gambar/matrik_knn.png"/> <br>
+![knn](https://github.com/user-attachments/assets/49720e36-803b-4336-8e08-897ccf289e48)<br>
+<img width="272" alt="matrik_knn" src="https://github.com/user-attachments/assets/9e4087bb-2a70-4302-96eb-e2601f7611d8"><br>
 
 Dari gambar di atas, terdapat 2436 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2994 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.70 dengan akurasi ≈ 69.57%.
@@ -386,8 +395,8 @@ dan 2994 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model *Decision Tree*
 
-<img src = "gambar/matrik_dt.png"/> <br>
-<img src = "gambar/dt.png"/> <br>
+![matrik_dt](https://github.com/user-attachments/assets/24c2b93c-3bab-49a6-8e73-e1960dd346bb) <br>
+<img width="275" alt="dt" src="https://github.com/user-attachments/assets/732a6357-e13c-49d5-bc1b-cefc7ffd2c76"> <br>
 
 Dari gambar di atas, terdapat 2203 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2718 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 72.57%.
@@ -396,8 +405,8 @@ dan 2718 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model *Random Forest*
 
-<img src = "gambar/matrik_rf.png"/> <br>
-<img src = "gambar/rf.png"/> <br>
+![matrik_rf](https://github.com/user-attachments/assets/6aa8eca6-8e40-40f2-acdd-8f4943ac14ed) <br>
+<img width="293" alt="rf" src="https://github.com/user-attachments/assets/861d7391-3b41-4d3d-b009-b66df004adce"> <br>
 
 Dari gambar di atas, terdapat 1804 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 3012 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 73.04%.
@@ -405,9 +414,8 @@ dan 3012 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 #### 6. Model *AdaBoost*
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model *AdaBoost*
-
-<img src = "gambar/matrik_boosting.png"/> <br>
-<img src = "gambar/boosting.png"/> <br>
+![matrik_boosting](https://github.com/user-attachments/assets/1ee5ff3e-5942-4f16-b943-7ee65f0e4b43) <br>
+<img width="278" alt="boosting" src="https://github.com/user-attachments/assets/0f202d45-bb8e-479e-a284-313b04a0de0e"> <br>
 
 Dari gambar di atas, terdapat 1990 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2854 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 72.95%.
@@ -417,20 +425,19 @@ dan 2854 data diklasifikasikan salah sebagai responden noncardiovascular. Dipero
 
 Berikut merupakan matriks confusion, akurasi, dan skor f1 dari model *Catboosting*
 
-<img src = "gambar/matrik_cat.png"/> <br>
-<img src = "gambar/cat.png"/> <br>
+![matrik_cat](https://github.com/user-attachments/assets/71a98847-ade9-4a80-a29b-7afff1b65d66) <br>
+<img width="286" alt="cat" src="https://github.com/user-attachments/assets/d43adfe4-08d3-4248-a894-83bf1abb2219"> <br>
 
 Dari gambar di atas, terdapat 2079 data diklasifikasikan salah sebagai responden cardiovascular 
 dan 2749 data diklasifikasikan salah sebagai responden noncardiovascular. Diperoleh skor F1 nya adalah 0.73 dengan akurasi ≈ 73.12%.
 
 #### Hasil Evaluasi
 Dari seluruh akurasi yang diketahui dari ketujuh model, dibentuk bar plot untuk melihat perbandingan nilai akurasi model sebagai berikut. 
-
-<img src = "gambar/Barplot_4.png"/> <br>
+![Barplot_4](https://github.com/user-attachments/assets/c7a5b122-1343-417a-8b4e-2ecfd51cf171) <br>
 
 Berdasarkan gambar di atas dan evaluasi masing-masing model untuk mengetahui skor akurasi, skor F1, dan jumlah kesalahan klasifikasi pada masing-masing model, didapat model *XGBoost* merupakan model terbaik karena memiliki skor akurasi dan skor F1 tertinggi, serta jumlah kesalahan klasifikasi yang paling sedikit, terutama pada cardiovascular. 
 
-<img src = "gambar/variabel_important.png"/> <br>
+![variabel_important](https://github.com/user-attachments/assets/f97656b4-2e54-4842-b69d-fec80bfc85c9) <br>
 makna dari grafik tersebut menunjukan bahwa 3 faktor yang sangat berpengaruh seseorang terkena penyakit cardiovascular ,yaitu tekanan darah sistolik yang tinggi, kadar kolesterol yang sangat tinggi, dan umur.
 
 
