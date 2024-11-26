@@ -84,6 +84,7 @@ Kolom-kolom numerikal: ['umur', 'height', 'weight', 'ap_hi', 'ap_lo'] <br>
 Kolom-kolom kategorikal: ['gender','cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio'] <br>
 Pertama, kita akan memvisualisasikan kolom-kolom kategorikal untuk melihat jumlah-jumlah nilai kategorikal menggunakan bar plot.
 
+![analisis_kategorik](https://github.com/user-attachments/assets/75c9afc2-8297-453d-912f-6b2fc1e8b5d1)
 <img src = "gambar/analisis_kategorik.png"/> <br>
 
 Gambar di atas dapat diinterpretasikan sebagai berikut.
